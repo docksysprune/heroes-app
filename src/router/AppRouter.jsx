@@ -4,20 +4,17 @@ import { LoginPage } from '../auth/pages/LoginPage'
 import { DCPage } from '../heroes/pages/DCPage'
 import { MarvelPage } from '../heroes/pages/MarvelPage'
 import { NotFound } from '../heroes/pages/NotFound'
+import { HeroesRoutes } from '../heroes/routes/HeroesRoutes'
+import { Navbar } from '../ui/components/Navbar'
 
 export const AppRouter = () => {
   return (
     <>
         <Routes>
-            <Route path='marvel' element={<MarvelPage/>}/>
-            <Route path='dc' element={<DCPage/>}/>
-
+          {/* Aquí irían rutas de auth, registro, forgot password */}          
             <Route path='login' element={<LoginPage/>}/>
-            <Route path='*' element={<NotFound/>}/>
 
-            <Route path='/' element={<Navigate to="/marvel"/>}/>
-            <Route path="/*" element={<Navigate to="/not-found" />} />
-            
+            <Route path='/*' element={<HeroesRoutes/>}/>           
         </Routes>
     </>
   )
