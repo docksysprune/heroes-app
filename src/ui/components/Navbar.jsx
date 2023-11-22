@@ -1,9 +1,18 @@
 import { useState } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import ButtonInfo from "./ButtonInfo/ButtonInfo";
 import Modal from "./Modal/Modal";
 
 export const Navbar = () => {
+
+  const navigate = useNavigate();
+
+  const onLogout = () => {
+    navigate('/login', {
+      replace: true
+    });
+  }
+
   const [showModal, setShowModal] = useState(false);
 
   const toggleModal = () => {
@@ -42,11 +51,10 @@ export const Navbar = () => {
         <ul className="navbar-nav ml-auto">
           <span className="nav-item nav-link text-primary">Miranda</span>
 
-          <button className="nav-item nav-link btn">Logout</button>
-          {/* Agregar el botón aquí */}
+          <button className="nav-item nav-link btn" onClick={onLogout}>Logout</button>
+
           <ButtonInfo onClick={toggleModal} />
 
-          {/* Renderizar el modal */}
           <Modal isOpen={showModal} onClose={toggleModal} />
         </ul>
       </div>

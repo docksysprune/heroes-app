@@ -13,15 +13,15 @@ const Modal = ({ isOpen, onClose }) => {
     };
 
     if (isOpen) {
-      document.body.style.overflow = 'hidden'; // Evitar scroll en el body cuando el modal está abierto
+      document.body.style.overflow = 'hidden'; // Will avoid the scroll on the body if the modal is open
       document.addEventListener('keydown', handleEscape);
     } else {
-      document.body.style.overflow = ''; // Restaurar scroll en el body cuando el modal se cierra
+      document.body.style.overflow = ''; // Will restore the scroll in the body once the modal is closed
       document.removeEventListener('keydown', handleEscape);
     }
 
     return () => {
-      document.body.style.overflow = ''; // Asegurar que el scroll se restaure si el componente se desmonta
+      document.body.style.overflow = ''; // Will make sure that the scroll is restored if the component gets unmounted
       document.removeEventListener('keydown', handleEscape);
     };
   }, [isOpen, onClose]);
@@ -44,7 +44,7 @@ const Modal = ({ isOpen, onClose }) => {
               x
             </button>
             <h2>What is heroes app?</h2>
-            <p>This is the app for visualizing your favorite DC & Marvel characters.</p>
+            <p>This app will allows you to visualize your favorite Marvel and DC characters.</p>
           </div>
         </div>,
         modalRoot
