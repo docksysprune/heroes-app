@@ -9,4 +9,7 @@ export default {
   esbuild: {
     loader: 'jsx', // Agregar esta línea para admitir sintaxis JSX
   },
+  setupFilesAfterEnv: [
+    '@testing-library/react', // Asegura que React esté configurado para las pruebas
+  ],
 };
