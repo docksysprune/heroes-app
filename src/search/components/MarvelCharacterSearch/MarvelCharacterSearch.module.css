@@ -1,0 +1,20 @@
+/* MarvelCharacterSearch.module.css */
+.searchForm {
+    margin-bottom: 20px;
+  }
+  
+  .characterCards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .card {
+    width: 200px;
+  }
+  
+  .characterImage {
+    width: 100%;
+    height: auto;
+  }
+  
