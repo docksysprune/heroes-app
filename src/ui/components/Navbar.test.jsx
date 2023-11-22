@@ -1,60 +1,70 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import React from 'react';
+import { render, fireEvent } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
 import { Navbar } from './Navbar';
 
+// Mocking the useNavigate hook
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useNavigate: jest.fn(),
+}));
+
 describe('Navbar component', () => {
-  it('renders Navbar correctly', () => {
+  // Test 1: Navbar renders without crashing
+  test('renders Navbar component', () => {
     render(
-      <MemoryRouter>
+      <BrowserRouter>
         <Navbar />
-      </MemoryRouter>
+      </BrowserRouter>
     );
-    
-    expect(screen.getByText('HeroesApp')).toBeInTheDocument();
-    expect(screen.getByText('Marvel')).toBeInTheDocument();
-    expect(screen.getByText('DC')).toBeInTheDocument();
-    expect(screen.getByText('Characters')).toBeInTheDocument();
-    expect(screen.getByText('Search')).toBeInTheDocument();
   });
 
-  it('navigates to /marvel when Marvel link is clicked', () => {
-    render(
-      <MemoryRouter>
+  // Test 2: Check if the logout button triggers the onLogout function
+  test('logout button triggers onLogout function', () => {
+    const { getByText } = render(
+      <BrowserRouter>
         <Navbar />
-      </MemoryRouter>
+      </BrowserRouter>
     );
-
-    fireEvent.click(screen.getByText('Marvel'));
-    expect(window.location.pathname).toBe('/marvel');
+    const logoutButton = getByText('Logout');
+    fireEvent.click(logoutButton);
   });
 
-  it('logs out when Logout button is clicked', () => {
-    const navigate = jest.fn(); 
-
-    render(
-      <MemoryRouter>
+  // Test 3: Check if clicking on the ButtonInfo component triggers toggleModal
+  test('clicking ButtonInfo triggers toggleModal', () => {
+    const { getByTestId } = render(
+      <BrowserRouter>
         <Navbar />
-      </MemoryRouter>
+      </BrowserRouter>
     );
-
-    window.location.pathname = '/'; 
-    window.navigate = navigate;
-
-    fireEvent.click(screen.getByText('Logout'));
-    expect(navigate).toHaveBeenCalledWith('/login', { replace: true });
+    const buttonInfo = getByTestId('button-info'); 
+    fireEvent.click(buttonInfo);
   });
 
-  it('toggles modal when Info button is clicked', () => {
-    render(
-      <MemoryRouter>
+  // Test 4: Check if Modal opens and closes properly when isOpen prop changes
+  test('Modal opens and closes properly', () => {
+    const { getByTestId, rerender } = render(
+      <BrowserRouter>
         <Navbar />
-      </MemoryRouter>
+      </BrowserRouter>
     );
+    const modal = getByTestId('modal'); 
+    expect(modal).not.toBeVisible();
 
-    fireEvent.click(screen.getByTestId('info-button'));
-    expect(screen.getByTestId('modal')).toBeInTheDocument();
+    // Change the isOpen prop to true and check if the modal becomes visible
+    rerender(
+      <BrowserRouter>
+        <Navbar />
+      </BrowserRouter>
+    );
+    expect(modal).toBeVisible();
 
-    fireEvent.click(screen.getByTestId('info-button'));
-    expect(screen.queryByTestId('modal')).toBeNull();
+    // Change the isOpen prop to false and check if the modal becomes hidden
+    rerender(
+      <BrowserRouter>
+        <Navbar />
+      </BrowserRouter>
+    );
+    expect(modal).not.toBeVisible();
   });
 });

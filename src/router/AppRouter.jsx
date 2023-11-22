@@ -7,10 +7,8 @@ import { HeroesRoutes } from '../heroes/routes/HeroesRoutes'
 export const AppRouter = () => {
   return (
     <>
-        <Routes>
-          {/* Aquí irían rutas de auth, registro, forgot password */}          
+        <Routes>       
             <Route path='login' element={<LoginPage/>}/>
-
             <Route path='/*' element={<HeroesRoutes/>}/>           
         </Routes>
     </>
