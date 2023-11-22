@@ -54,7 +54,7 @@ const MarvelCharacterSearch = () => {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
           />
-          <button className="btn btn-primary" onClick={handleSearch}>
+          <button className="btn btn-primary mt-2" onClick={handleSearch}>
             Search
           </button>
         </Form.Group>
