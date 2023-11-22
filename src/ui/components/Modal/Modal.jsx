@@ -28,9 +28,9 @@ const Modal = ({ isOpen, onClose }) => {
 
   useEffect(() => {
     if (isOpen) {
-      console.log('Modal abierto');
+      console.log('Modal is opened');
     } else {
-      console.log('Modal cerrado');
+      console.log('Modal is closed');
     }
   }, [isOpen]);
 
@@ -41,10 +41,10 @@ const Modal = ({ isOpen, onClose }) => {
         <div className={modalClassName} onClick={onClose}>
           <div className={modalStyles.modal} onClick={(e) => e.stopPropagation()}>
             <button className={modalStyles.closeButton} onClick={onClose}>
-              X
+              x
             </button>
             <h2>What is heroes app?</h2>
-            <p>This is the heroes app modal content.</p>
+            <p>This is the app for visualizing your favorite DC & Marvel characters.</p>
           </div>
         </div>,
         modalRoot

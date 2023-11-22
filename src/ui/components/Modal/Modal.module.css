@@ -26,6 +26,12 @@
     border: none;
     cursor: pointer;
     font-size: 18px;
+    color: white;
+  }
+
+  .open {
+    opacity: 2;
+    pointer-events: auto;
   }
   
   
